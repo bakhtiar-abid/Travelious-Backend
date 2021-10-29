@@ -21,12 +21,17 @@ async function run() {
    try {
       await client.connect();
       console.log("successfully database connected");
-      const database = client.db("online_Shop");
-      const productCollection = database.collection("products");
+      const ManageCollection = client.db("ManageOrders").collection("Orders");
+      const AddServiceCollection = client
+         .db("addService")
+         .collection("services");
 
-      const orderCollection = database.collection("orders");
-
-      //GET Products API
+      //GET Services API
+      app.get("/allservices", async (req, res) => {
+         const result = await ManageCollection.find({}).toArray();
+         res.send(result);
+         console.log(result);
+      });
    } finally {
       // await client.close();
    }
@@ -34,7 +39,7 @@ async function run() {
 
 run().catch(console.dir);
 
-app.get("/adding", (req, res) => {
+app.get("/travel", (req, res) => {
    res.send("Travelious is running");
 });
 
