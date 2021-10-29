@@ -39,7 +39,11 @@ async function run() {
 
 run().catch(console.dir);
 
-app.get("/travel", (req, res) => {
+app.get("/", (req, res) => {
+   res.send("Server is running");
+});
+
+app.get("/check", (req, res) => {
    res.send("Travelious is running");
 });
 
