@@ -76,7 +76,7 @@ async function run() {
                status: "approved",
             },
          };
-         const result = await usersCollection.updateOne(
+         const result = await AddOrderCollection.updateOne(
             filter,
             updateDoc,
             options
