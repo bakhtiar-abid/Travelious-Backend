@@ -43,10 +43,17 @@ async function run() {
       // POST API
       app.post("/orders", async (req, res) => {
          const service = req.body;
-         console.log("hit the post api", service);
-         const result = await AddOrderCollection.insertOne(service);
+         console.log("hit the post api", orders);
+         const result = await AddOrderCollection.insertOne(orders);
          console.log(result);
          res.json(result);
+      });
+
+      //All Plans GET API
+      app.get("/manageplans", async (req, res) => {
+         const result = await AddOrderCollection.find({}).toArray();
+         res.send(result);
+         console.log(result);
       });
    } finally {
       // await client.close();
