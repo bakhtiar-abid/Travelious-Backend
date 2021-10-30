@@ -32,6 +32,15 @@ async function run() {
          res.send(result);
          console.log(result);
       });
+
+      //GET Single Service
+      app.get("/plan/:id", async (req, res) => {
+         const id = req.params.id;
+         console.log("getting specific plan", id);
+         const query = { _id: ObjectId(id) };
+         const service = await ManageCollection.findOne(query);
+         res.json(service);
+      });
    } finally {
       // await client.close();
    }
