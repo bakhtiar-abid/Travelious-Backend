@@ -72,7 +72,7 @@ async function run() {
          res.send(user);
       });
       //UPDATE API
-      app.put("/updateplan/:id", async (req, res) => {
+      app.put("/manageplans/:id", async (req, res) => {
          const id = req.params.id;
          const updatedStatus = req.body;
          console.log(updatedStatus);
@@ -80,7 +80,7 @@ async function run() {
          const options = { upsert: true };
          const updateDoc = {
             $set: {
-               status: updatedStatus.status,
+               status: "approved",
             },
          };
          const result = await AddOrderCollection.updateOne(
