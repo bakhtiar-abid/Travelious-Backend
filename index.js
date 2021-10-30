@@ -64,7 +64,13 @@ async function run() {
          }).toArray();
          res.send(result);
       });
-
+      //GET API
+      app.get("/manageplans/:id", async (req, res) => {
+         const id = req.params.id;
+         const query = { _id: ObjectId(id) };
+         const user = await AddOrderCollection.findOne(query);
+         res.send(user);
+      });
       //UPDATE API
       app.put("/updateplan/:id", async (req, res) => {
          const id = req.params.id;
