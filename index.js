@@ -40,7 +40,7 @@ async function run() {
          res.json(service);
       });
 
-      // POST API
+      // Order POST API
       app.post("/orders", async (req, res) => {
          const orders = req.body;
          console.log("hit the post api", orders);
@@ -65,7 +65,27 @@ async function run() {
          res.send(result);
       });
 
-      // delete plan
+      //UPDATE API
+      app.put("/updateplan/:id", async (req, res) => {
+         const id = req.params.id;
+         // const updatedUser = req.body;
+         const filter = { _id: ObjectId(id) };
+         const options = { upsert: true };
+         const updateDoc = {
+            $set: {
+               status: "approved",
+            },
+         };
+         const result = await usersCollection.updateOne(
+            filter,
+            updateDoc,
+            options
+         );
+         console.log("updating", id);
+         res.json(result);
+      });
+
+      // DELETE PLAN API
 
       app.delete("/deleteplan/:id", async (req, res) => {
          console.log(req.params.id);
