@@ -27,7 +27,7 @@ async function run() {
          .collection("services");
 
       //GET Services API
-      app.get("/allservices", async (req, res) => {
+      app.get("/allplans", async (req, res) => {
          const result = await ManageCollection.find({}).toArray();
          res.send(result);
          console.log(result);
