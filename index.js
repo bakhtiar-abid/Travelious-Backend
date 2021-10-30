@@ -56,6 +56,15 @@ async function run() {
          console.log(result);
       });
 
+      // My Plans
+
+      app.get("/myplans/:email", async (req, res) => {
+         const result = await AddOrderCollection.find({
+            email: req.params.email,
+         }).toArray();
+         res.send(result);
+      });
+
       // delete plan
 
       app.delete("/deleteplan/:id", async (req, res) => {
