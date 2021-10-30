@@ -75,11 +75,12 @@ async function run() {
       app.put("/updateplan/:id", async (req, res) => {
          const id = req.params.id;
          const updatedStatus = req.body;
+         console.log(updatedStatus);
          const filter = { _id: ObjectId(id) };
          const options = { upsert: true };
          const updateDoc = {
             $set: {
-               status: updatedStatus,
+               status: updatedStatus.status,
             },
          };
          const result = await AddOrderCollection.updateOne(
