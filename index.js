@@ -55,6 +55,16 @@ async function run() {
          res.send(result);
          console.log(result);
       });
+
+      // delete plan
+
+      app.delete("/deleteplan/:id", async (req, res) => {
+         console.log(req.params.id);
+         const result = await AddOrderCollection.deleteOne({
+            _id: ObjectId(req.params.id),
+         });
+         res.send(result);
+      });
    } finally {
       // await client.close();
    }
