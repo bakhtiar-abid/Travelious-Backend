@@ -22,24 +22,31 @@ async function run() {
       await client.connect();
       console.log("successfully database connected");
       const ManageCollection = client.db("ManageOrders").collection("Orders");
-      const AddServiceCollection = client
-         .db("addService")
-         .collection("services");
+      const AddOrderCollection = client.db("addOrder").collection("orders");
 
-      //GET Services API
+      //GET AllPlans API
       app.get("/allplans", async (req, res) => {
          const result = await ManageCollection.find({}).toArray();
          res.send(result);
          console.log(result);
       });
 
-      //GET Single Service
+      //GET Single Plan API
       app.get("/plan/:id", async (req, res) => {
          const id = req.params.id;
          console.log("getting specific plan", id);
          const query = { _id: ObjectId(id) };
          const service = await ManageCollection.findOne(query);
          res.json(service);
+      });
+
+      // POST API
+      app.post("/orders", async (req, res) => {
+         const service = req.body;
+         console.log("hit the post api", service);
+         const result = await AddOrderCollection.insertOne(service);
+         console.log(result);
+         res.json(result);
       });
    } finally {
       // await client.close();
