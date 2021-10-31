@@ -1,6 +1,9 @@
 const express = require("express");
 const { MongoClient } = require("mongodb");
+
+// const fileUpload = require("express-fileupload");
 const ObjectId = require("mongodb").ObjectId;
+
 require("dotenv").config();
 const cors = require("cors");
 
@@ -10,6 +13,9 @@ const port = process.env.PORT || 3001;
 //middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
+
+// app.use(fileUpload());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.xztta.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
@@ -89,6 +95,56 @@ async function run() {
             options
          );
          console.log("updating", id);
+         res.json(result);
+      });
+      //
+      // app.get("/file/:filename", async (req, res) => {
+      //    try {
+      //       const file = await gfs.files.findOne({
+      //          filename: req.params.filename,
+      //       });
+      //       const readStream = gfs.createReadStream(file.filename);
+      //       readStream.pipe(res);
+      //    } catch (error) {
+      //       res.send("not found");
+      //    }
+      // });
+
+      //POST ADD PLAN API
+      // app.post("/addplan", async (req, res) => {
+
+      //    // const newPlan = req.body;
+
+      //    // console.log("got new user", req.body);
+      //    // console.log("added user", result);
+      //    // res.json(result);
+      // });
+
+      // app.post("/addplan", (req, res) => {
+      //    var imgg = req.files.img;
+      //    console.log(img);
+      //    imgg.mv("public/pimg" + imgg.this.name, function (err) {
+      //       if (err) {
+      //          res.json({ status: "file not uploaded" });
+      //       } else {
+      //          var insObj = {
+      //             name: req.body.name,
+      //             description: req.body.description,
+      //             price: req.body.price,
+      //             img: imgg.name,
+      //          };
+      //          const result = ManageCollection.insertOne(insObj);
+      //          res.json({ status: "Record Inserted successfully" });
+      //       }
+      //    });
+      // });
+
+      // POST API
+      app.post("/addplan", async (req, res) => {
+         var newPlan = req.body;
+         const result = await ManageCollection.insertOne(newPlan);
+         console.log("got new user", req.body);
+         console.log("added user", result);
          res.json(result);
       });
 
