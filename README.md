@@ -1,6 +1,6 @@
 # Travelious
 
-[![enter image description here](https://i.ibb.co/Lkh1cXT/image-1.png)](https://travelious-react.web.app/)
+[![enter image description here](https://i.ibb.co/1m0fPgv/Screenshot-1.png)](https://travelious-react.web.app/)
 
 ## About & Features
 
